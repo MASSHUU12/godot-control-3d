@@ -10,7 +10,7 @@ public partial class Control3D : Node3D
 	public bool InputEnabled = true;
 
 	[Export] public Area3D CaptureArea { get; set; }
-	[Export] public SubViewport Viewport { get; set; }
+	[Export] public SubViewport SubViewport { get; set; }
 	[Export] public MeshInstance3D Display { get; set; }
 
 	private Vector2 _meshSize;
@@ -25,6 +25,9 @@ public partial class Control3D : Node3D
 		// Cache the values.
 		_meshSize = Display.Mesh.Get("size").AsVector2();
 		_halfMeshSize = _meshSize / 2;
-		_viewportSize = Viewport.Size;
+		_viewportSize = SubViewport.Size;
+
+		CaptureArea.MouseEntered += () => _mouseEntered = true;
+		CaptureArea.MouseExited += () => _mouseEntered = false;
 	}
 }
