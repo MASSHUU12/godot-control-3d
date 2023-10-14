@@ -32,6 +32,20 @@ public partial class Control3D : Node3D
 	}
 
 	/// <summary>
+	/// Converts the mouse position to the 2D world.
+	/// </summary>
+	/// <param name="mousePos3D">The mouse position in the 3D world.</param>
+	/// <returns>The mouse position in the 2D world.</returns>
+	private Vector2 MouseTo2DWorld(Vector3 mousePos3D)
+	{
+		Vector2 mousePos2D = new(mousePos3D.X, -mousePos3D.Y);
+		mousePos2D += _halfMeshSize;
+		mousePos2D /= _meshSize;
+		mousePos2D *= _viewportSize;
+		return mousePos2D;
+	}
+
+	/// <summary>
 	/// Clamps the mouse position to the viewport size.
 	/// </summary>
 	/// <param name="mousePos2D">The mouse position in the 2D world.</param>
