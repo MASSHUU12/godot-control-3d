@@ -31,6 +31,15 @@ public partial class Control3D : Node3D
 		CaptureArea.MouseExited += () => _mouseEntered = false;
 	}
 
+	public override void _Input(InputEvent input)
+	{
+		if (!InputEnabled) return;
+
+		if (_mouseEntered && input is InputEventMouse eventMouse)
+			HandleMouse(eventMouse);
+		else if (input is not InputEventMouse) SubViewport.PushInput(input);
+	}
+
 	/// <summary>
 	/// Handles the mouse input.
 	/// </summary>
