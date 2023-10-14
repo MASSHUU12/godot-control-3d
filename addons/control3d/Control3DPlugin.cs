@@ -6,12 +6,14 @@ public partial class Control3DPlugin : EditorPlugin
 {
 	public override void _EnterTree()
 	{
-		// Initialization of the plugin goes here.
+		var script = GD.Load<Script>("res://addons/control3d/src/Control3D.cs");
+		var texture = GD.Load<Texture2D>("res://icon.svg");
+		AddCustomType("Control3D", "Node3D", script, texture);
 	}
 
 	public override void _ExitTree()
 	{
-		// Clean-up of the plugin goes here.
+		RemoveCustomType("Control3D");
 	}
 }
 #endif
