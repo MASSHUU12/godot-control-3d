@@ -32,6 +32,28 @@ public partial class Control3D : Node3D
 	}
 
 	/// <summary>
+	/// Handles the mouse input.
+	/// </summary>
+	/// <param name="eventMouse">The mouse event.</param>
+	private void HandleMouse(InputEventMouse eventMouse)
+	{
+		Vector3 mousePos3D = FindMouse(eventMouse.GlobalPosition);
+		bool mouseInside = mousePos3D != Vector3.Zero;
+
+		// If the mouse is inside the panel,
+		// we need to convert the mouse position to the 2D world.
+		mousePos3D = mouseInside
+			? CaptureArea.GlobalTransform.AffineInverse() * new Vector3(mousePos3D.X, mousePos3D.Y, 0)
+			: new(_halfMeshSize.X, -_halfMeshSize.Y, 0);
+
+		Vector2 mousePos2D = MouseTo2DWorld(mousePos3D);
+		mousePos2D = ClampMousePosition(mousePos2D);
+
+		eventMouse.Position = eventMouse.GlobalPosition = mousePos2D;
+		SubViewport.PushInput(eventMouse);
+	}
+
+	/// <summary>
 	/// Converts the mouse position to the 2D world.
 	/// </summary>
 	/// <param name="mousePos3D">The mouse position in the 3D world.</param>
