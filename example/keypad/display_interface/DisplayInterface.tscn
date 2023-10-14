@@ -1,0 +1,97 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvuto48ysoovc"]
+
+[ext_resource type="PackedScene" uid="uid://k15c4s7a116c" path="res://example/keypad/display_interface/Btn.tscn" id="1_3l1qm"]
+[ext_resource type="Script" path="res://example/keypad/display_interface/DisplayInterface.gd" id="1_lur1k"]
+
+[node name="DisplayInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lur1k")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+placeholder_text = "PIN"
+max_length = 4
+editable = false
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 4
+columns = 3
+
+[node name="Btn" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+
+[node name="Btn2" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+text = "2"
+
+[node name="Btn3" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+text = "3"
+
+[node name="Btn4" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+text = "4"
+
+[node name="Btn5" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+text = "5"
+
+[node name="Btn6" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+text = "6"
+
+[node name="Btn7" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+text = "7"
+
+[node name="Btn8" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+text = "8"
+
+[node name="Btn9" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+text = "9"
+
+[node name="Btn10" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+text = "C"
+
+[node name="Btn11" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+text = "0"
+
+[node name="Btn12" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer" instance=ExtResource("1_3l1qm")]
+layout_mode = 2
+text = "*"
