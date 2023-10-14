@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://tm74junxkn7s"]
+[gd_scene load_steps=7 format=3 uid="uid://tm74junxkn7s"]
 
 [ext_resource type="PackedScene" uid="uid://diyo4thirp3n2" path="res://example/keypad/Keypad.tscn" id="1_h6tg4"]
+[ext_resource type="PackedScene" uid="uid://dvnxjokqnumnn" path="res://example/player/Player.tscn" id="2_456kc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bm8h2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -32,6 +33,7 @@ shadow_enabled = true
 [node name="Scene" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="Scene"]
+use_collision = true
 size = Vector3(30, 0.5, 30)
 material = SubResource("StandardMaterial3D_1hjd5")
 
@@ -41,5 +43,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749834, 0)
 [node name="Keypad" parent="Scene" instance=ExtResource("1_h6tg4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.75, 0.5)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.535, 0.8, 0.77)
+[node name="Player" parent="Scene" instance=ExtResource("2_456kc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14588, 2.36964)
