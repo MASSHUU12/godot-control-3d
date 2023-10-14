@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://tm74junxkn7s"]
+[gd_scene load_steps=6 format=3 uid="uid://tm74junxkn7s"]
+
+[ext_resource type="PackedScene" uid="uid://diyo4thirp3n2" path="res://example/keypad/Keypad.tscn" id="1_h6tg4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bm8h2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -36,5 +38,8 @@ material = SubResource("StandardMaterial3D_1hjd5")
 [node name="CSGBox3D" type="CSGBox3D" parent="Scene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749834, 0)
 
+[node name="Keypad" parent="Scene" instance=ExtResource("1_h6tg4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.75, 0.5)
+
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.8, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.535, 0.8, 0.77)
