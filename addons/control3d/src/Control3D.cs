@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 [Tool]
@@ -12,8 +13,11 @@ public partial class Control3D : Node3D
 		get => _rayDistance;
 		set
 		{
-			_rayDistance = value;
-			UpdateConfigurationWarnings();
+			if (value != _rayDistance)
+			{
+				_rayDistance = value;
+				UpdateConfigurationWarnings();
+			}
 		}
 	}
 	/// <summary>
@@ -25,8 +29,11 @@ public partial class Control3D : Node3D
 		get => _inputEnabled;
 		set
 		{
-			_inputEnabled = value;
-			UpdateConfigurationWarnings();
+			if (value != _inputEnabled)
+			{
+				_inputEnabled = value;
+				UpdateConfigurationWarnings();
+			}
 		}
 	}
 	/// <summary>
@@ -38,8 +45,11 @@ public partial class Control3D : Node3D
 		get => _captureArea;
 		set
 		{
-			_captureArea = value;
-			UpdateConfigurationWarnings();
+			if (value != _captureArea)
+			{
+				_captureArea = value;
+				UpdateConfigurationWarnings();
+			}
 		}
 	}
 	/// <summary>
@@ -51,8 +61,11 @@ public partial class Control3D : Node3D
 		get => _subViewport;
 		set
 		{
-			_subViewport = value;
-			UpdateConfigurationWarnings();
+			if (value != _subViewport)
+			{
+				_subViewport = value;
+				UpdateConfigurationWarnings();
+			}
 		}
 	}
 	/// <summary>
@@ -64,16 +77,19 @@ public partial class Control3D : Node3D
 		get => _display;
 		set
 		{
-			_display = value;
-			UpdateConfigurationWarnings();
+			if (value != _display)
+			{
+				_display = value;
+				UpdateConfigurationWarnings();
+			}
 		}
 	}
 
 	private float _rayDistance = 2f;
 	private bool _inputEnabled = true;
-	private Area3D _captureArea;
-	private SubViewport _subViewport;
-	private MeshInstance3D _display;
+	private Area3D _captureArea = null;
+	private SubViewport _subViewport = null;
+	private MeshInstance3D _display = null;
 
 	private Vector2 _meshSize;
 	private Vector2 _halfMeshSize;
@@ -91,6 +107,36 @@ public partial class Control3D : Node3D
 
 		CaptureArea.MouseEntered += () => _mouseEntered = true;
 		CaptureArea.MouseExited += () => _mouseEntered = false;
+	}
+
+	public override string[] _GetConfigurationWarnings()
+	{
+		List<string> warnings = new();
+
+		warnings.AddRange(base._GetConfigurationWarnings() ?? System.Array.Empty<string>());
+
+		if (CaptureArea == null)
+		{
+			var warning = "This node does not have a CaptureArea associated with it. " +
+				"Please assign one in the editor.";
+			warnings.Add(warning);
+		}
+
+		if (SubViewport == null)
+		{
+			var warning = "This node does not have a SubViewport associated with it. " +
+				"Please assign one in the editor.";
+			warnings.Add(warning);
+		}
+
+		if (Display == null)
+		{
+			var warning = "This node does not have a Display associated with it. " +
+				"Please assign one in the editor.";
+			warnings.Add(warning);
+		}
+
+		return warnings.ToArray();
 	}
 
 	public override void _Input(InputEvent input)
