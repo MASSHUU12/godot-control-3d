@@ -1,17 +1,15 @@
 [gd_scene load_steps=7 format=3 uid="uid://diyo4thirp3n2"]
 
 [ext_resource type="Script" path="res://addons/control3d/src/Control3D.cs" id="1_252a0"]
+[ext_resource type="Texture2D" uid="uid://bwtnulh2oriis" path="res://example/keypad/display_interface/viewport_texture.tres" id="2_8coow"]
 [ext_resource type="PackedScene" uid="uid://bvuto48ysoovc" path="res://example/keypad/display_interface/DisplayInterface.tscn" id="2_53huw"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_1p4vv"]
-viewport_path = NodePath("Control3D/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3q2nd"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_1p4vv")
+albedo_texture = ExtResource("2_8coow")
 
 [sub_resource type="QuadMesh" id="QuadMesh_1nfp5"]
-size = Vector2(0.048, 0.095)
+size = Vector2(0.144, 0.285)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_atiu2"]
 points = PackedVector3Array(0.0797619, 0.152381, 0.00238095, -0.0773809, -0.152381, -0.00238095, -0.0773809, -0.152381, 0.00238095, -0.0773809, 0.152381, -0.00238095, 0.0797619, -0.152381, -0.00238095, 0.0797619, -0.152381, 0.00238095, -0.0773809, 0.152381, 0.00238095, 0.0797619, 0.152381, -0.00238095)
@@ -36,7 +34,7 @@ shape = SubResource("ConvexPolygonShape3D_atiu2")
 [node name="SubViewport" type="SubViewport" parent="Control3D"]
 process_mode = 3
 disable_3d = true
-size_2d_override = Vector2i(288, 576)
+size_2d_override = Vector2i(216, 432)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 

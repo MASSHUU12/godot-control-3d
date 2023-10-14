@@ -36,6 +36,13 @@ public partial class Player : CharacterBody3D
 	public override void _Input(InputEvent @event)
 	{
 		HandleCamera(@event);
+
+		if (@event.IsActionPressed("player_switch_mouse"))
+		{
+			Input.MouseMode = Input.MouseMode == Input.MouseModeEnum.Captured
+				? Input.MouseModeEnum.Visible
+				: Input.MouseModeEnum.Captured;
+		}
 	}
 
 	/// <summary>

@@ -41,7 +41,7 @@ material = SubResource("StandardMaterial3D_1hjd5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749834, 0)
 
 [node name="Keypad" parent="Scene" instance=ExtResource("1_h6tg4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.75, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.491, 0.51)
 
 [node name="Player" parent="Scene" instance=ExtResource("2_456kc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14588, 2.36964)
