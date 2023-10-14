@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://tm74junxkn7s"]
+[gd_scene load_steps=15 format=3 uid="uid://tm74junxkn7s"]
 
 [ext_resource type="PackedScene" uid="uid://diyo4thirp3n2" path="res://example/keypad/Keypad.tscn" id="1_h6tg4"]
 [ext_resource type="PackedScene" uid="uid://dvnxjokqnumnn" path="res://example/player/Player.tscn" id="2_456kc"]
+[ext_resource type="Script" path="res://example/example_scene/Door.gd" id="3_w267y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bm8h2"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,8 +20,54 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1hjd5"]
 albedo_color = Color(0.423529, 0.423529, 0.423529, 1)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_d2uij"]
+viewport_path = NodePath("Scene/Keypad/Control3D/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a7erk"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_d2uij")
+
 [sub_resource type="BoxMesh" id="BoxMesh_n4u3t"]
-size = Vector3(5, 2, 0.3)
+size = Vector3(5, 3, 0.3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gmo85"]
+points = PackedVector3Array(-2.53869, -1.53968, -0.189683, 2.53869, 1.55556, 0.207143, 2.53869, 1.55556, -0.189683, -2.53869, 1.55556, 0.207143, 2.53869, -1.53968, 0.207143, 2.53869, -1.53968, -0.189683, -2.53869, 1.55556, -0.189683, -2.53869, -1.53968, 0.207143)
+
+[sub_resource type="Animation" id="Animation_6potc"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.45608, 0, 0), Vector3(3.721, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e24pc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.45608, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gtn1j"]
+_data = {
+"RESET": SubResource("Animation_e24pc"),
+"open": SubResource("Animation_6potc")
+}
 
 [node name="ExampleScene" type="Node3D"]
 
@@ -47,6 +94,9 @@ size = Vector3(0.660596, 2.52152, 1)
 [node name="Keypad" parent="Scene" instance=ExtResource("1_h6tg4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.491, 0.51)
 
+[node name="Display" parent="Scene/Keypad/Control3D" index="0"]
+material_override = SubResource("StandardMaterial3D_a7erk")
+
 [node name="Player" parent="Scene" instance=ExtResource("2_456kc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14588, 2.36964)
 
@@ -56,12 +106,22 @@ billboard = 1
 text = "Press Alt
 to switch mouse mode"
 
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="Scene"]
+[node name="Door" type="StaticBody3D" parent="Scene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45608, 0, 0)
+script = ExtResource("3_w267y")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Scene/AnimatableBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scene/Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38053, 1.25145, 0.193517)
 mesh = SubResource("BoxMesh_n4u3t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scene/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38053, 1.25145, 0.193517)
+shape = SubResource("ConvexPolygonShape3D_gmo85")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Scene/Door"]
+libraries = {
+"": SubResource("AnimationLibrary_gtn1j")
+}
 
 [node name="Room" type="CSGCombiner3D" parent="Scene"]
 use_collision = true
@@ -74,3 +134,11 @@ size = Vector3(5, 3, 5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97739, 1.44455, -2.04242)
 operation = 2
 size = Vector3(4.5, 2.5, 4.5)
+
+[node name="Label3D" type="Label3D" parent="Scene/Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.72601, 1.64746, -4.26523)
+text = "The inner machinations of my mind are an enigma"
+
+[connection signal="pin_accepted" from="Scene/Keypad/Control3D/SubViewport/DisplayInterface" to="Scene/Door" method="_on_display_interface_pin_accepted"]
+
+[editable path="Scene/Keypad"]

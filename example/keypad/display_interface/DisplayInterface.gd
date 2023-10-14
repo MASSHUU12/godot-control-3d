@@ -1,6 +1,6 @@
 extends Control
 
-signal pin_accepted
+signal pin_accepted()
 
 @onready var grid_container: GridContainer = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/CenterContainer/GridContainer
 @onready var line_edit: LineEdit = $CenterContainer/PanelContainer/MarginContainer/VBoxContainer/LineEdit
@@ -16,11 +16,11 @@ func _ready() -> void:
 func handle_keypad(btn: Button) -> void:
 	var text: String = btn.text
 
+	if text == "*" and PIN == line_edit.text:
+		pin_accepted.emit()
+
 	if text == "C" or text == "*":
 		line_edit.text = ""
 		return
-
-	if text == "*" and PIN == line_edit.text:
-		pin_accepted.emit()
 
 	line_edit.text += text
