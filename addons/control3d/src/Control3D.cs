@@ -7,23 +7,73 @@ public partial class Control3D : Node3D
 	/// The maximum distance that the RayCast used for collision detection will travel.
 	/// </summary>
 	[Export(PropertyHint.Range, "0, 100, 0.1")]
-	public float RayDistance = 2f;
+	public float RayDistance
+	{
+		get => _rayDistance;
+		set
+		{
+			_rayDistance = value;
+			UpdateConfigurationWarnings();
+		}
+	}
 	/// <summary>
 	/// Determines whether input is enabled for this Control3D node.
 	/// </summary>
-	[Export] public bool InputEnabled = true;
+	[Export]
+	public bool InputEnabled
+	{
+		get => _inputEnabled;
+		set
+		{
+			_inputEnabled = value;
+			UpdateConfigurationWarnings();
+		}
+	}
 	/// <summary>
 	/// The area used to capture input events for this control.
 	/// </summary>
-	[Export] public Area3D CaptureArea { get; set; }
+	[Export]
+	public Area3D CaptureArea
+	{
+		get => _captureArea;
+		set
+		{
+			_captureArea = value;
+			UpdateConfigurationWarnings();
+		}
+	}
 	/// <summary>
 	/// The SubViewport used to render the 3D scene.
 	/// </summary>
-	[Export] public SubViewport SubViewport { get; set; }
+	[Export]
+	public SubViewport SubViewport
+	{
+		get => _subViewport;
+		set
+		{
+			_subViewport = value;
+			UpdateConfigurationWarnings();
+		}
+	}
 	/// <summary>
 	/// The 3D mesh instance used to display the control.
 	/// </summary>
-	[Export] public MeshInstance3D Display { get; set; }
+	[Export]
+	public MeshInstance3D Display
+	{
+		get => _display;
+		set
+		{
+			_display = value;
+			UpdateConfigurationWarnings();
+		}
+	}
+
+	private float _rayDistance = 2f;
+	private bool _inputEnabled = true;
+	private Area3D _captureArea;
+	private SubViewport _subViewport;
+	private MeshInstance3D _display;
 
 	private Vector2 _meshSize;
 	private Vector2 _halfMeshSize;
