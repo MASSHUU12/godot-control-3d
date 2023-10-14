@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="godot-control-3d"
-config/features=PackedStringArray("4.1", "Forward Plus")
+run/main_scene="res://example/example_scene/ExampleScene.tscn"
+config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="godot-control-3d"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/control3d/plugin.cfg")
