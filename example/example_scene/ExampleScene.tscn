@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://tm74junxkn7s"]
+[gd_scene load_steps=8 format=3 uid="uid://tm74junxkn7s"]
 
 [ext_resource type="PackedScene" uid="uid://diyo4thirp3n2" path="res://example/keypad/Keypad.tscn" id="1_h6tg4"]
 [ext_resource type="PackedScene" uid="uid://dvnxjokqnumnn" path="res://example/player/Player.tscn" id="2_456kc"]
@@ -19,6 +19,9 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1hjd5"]
 albedo_color = Color(0.423529, 0.423529, 0.423529, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_n4u3t"]
+size = Vector3(5, 2, 0.3)
+
 [node name="ExampleScene" type="Node3D"]
 
 [node name="Environment" type="Node3D" parent="."]
@@ -38,7 +41,8 @@ size = Vector3(30, 0.5, 30)
 material = SubResource("StandardMaterial3D_1hjd5")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Scene"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749834, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.473777, 1.53608, 0)
+size = Vector3(0.660596, 2.52152, 1)
 
 [node name="Keypad" parent="Scene" instance=ExtResource("1_h6tg4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.491, 0.51)
@@ -51,3 +55,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.849297, 1.63562, 0)
 billboard = 1
 text = "Press Alt
 to switch mouse mode"
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="Scene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45608, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scene/AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38053, 1.25145, 0.193517)
+mesh = SubResource("BoxMesh_n4u3t")
+
+[node name="Room" type="CSGCombiner3D" parent="Scene"]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Scene/Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.93594, 1.71262, -2.34094)
+size = Vector3(5, 3, 5)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Scene/Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97739, 1.44455, -2.04242)
+operation = 2
+size = Vector3(4.5, 2.5, 4.5)
