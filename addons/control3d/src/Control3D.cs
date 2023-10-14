@@ -31,6 +31,20 @@ public partial class Control3D : Node3D
 		CaptureArea.MouseExited += () => _mouseEntered = false;
 	}
 
+	/// <summary>
+	/// Clamps the mouse position to the viewport size.
+	/// </summary>
+	/// <param name="mousePos2D">The mouse position in the 2D world.</param>
+	/// <returns>The clamped mouse position.</returns>
+	private Vector2 ClampMousePosition(Vector2 mousePos2D)
+	{
+		return mousePos2D with
+		{
+			X = Mathf.Clamp(mousePos2D.X, 0, _viewportSize.X),
+			Y = Mathf.Clamp(mousePos2D.Y, 0, _viewportSize.Y)
+		};
+	}
+
 	/// <summarY>
 	/// Finds the mouse position in the 3D world.
 	/// </summary>
