@@ -21,5 +21,10 @@ public partial class Control3D : Node3D
 	public override void _Ready()
 	{
 		base._Ready();
+
+		// Cache the values.
+		_meshSize = Display.Mesh.Get("size").AsVector2();
+		_halfMeshSize = _meshSize / 2;
+		_viewportSize = Viewport.Size;
 	}
 }
