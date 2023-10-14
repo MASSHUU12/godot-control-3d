@@ -9,9 +9,9 @@ public partial class Control3D : Node3D
 	[Export]
 	public bool InputEnabled = true;
 
-	private Area3D _captureArea;
-	private SubViewport _viewport;
-	private MeshInstance3D _display;
+	[Export] public Area3D CaptureArea { get; set; }
+	[Export] public SubViewport Viewport { get; set; }
+	[Export] public MeshInstance3D Display { get; set; }
 
 	private Vector2 _meshSize;
 	private Vector2 _halfMeshSize;
