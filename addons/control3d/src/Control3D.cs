@@ -30,4 +30,29 @@ public partial class Control3D : Node3D
 		CaptureArea.MouseEntered += () => _mouseEntered = true;
 		CaptureArea.MouseExited += () => _mouseEntered = false;
 	}
+
+	/// <summarY>
+	/// Finds the mouse position in the 3D world.
+	/// </summary>
+	/// <param name="globalPosition">The global position of the mouse.</param>
+	/// <returns>The mouse position in the 3D world.</returns>
+	private Vector3 FindMouse(Vector2 globalPosition)
+	{
+		var camera = GetViewport().GetCamera3D();
+		PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
+
+		var rayOrigin = camera.ProjectRayOrigin(globalPosition);
+		var rayEnd = rayOrigin + camera.ProjectRayNormal(globalPosition) * RayDistance;
+
+		PhysicsRayQueryParameters3D physicsRay = new()
+		{
+			From = rayOrigin,
+			To = rayEnd,
+			CollideWithBodies = false,
+			CollideWithAreas = true
+		};
+
+		var result = spaceState.IntersectRay(physicsRay);
+		return result.Count > 0 ? (Vector3)result["position"] : Vector3.Zero;
+	}
 }
