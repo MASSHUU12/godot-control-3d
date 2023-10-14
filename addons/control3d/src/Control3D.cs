@@ -3,14 +3,26 @@ using Godot;
 [Tool]
 public partial class Control3D : Node3D
 {
+	/// <summary>
+	/// The maximum distance that the RayCast used for collision detection will travel.
+	/// </summary>
 	[Export(PropertyHint.Range, "0, 100, 0.1")]
 	public float RayDistance = 2f;
-
-	[Export]
-	public bool InputEnabled = true;
-
+	/// <summary>
+	/// Determines whether input is enabled for this Control3D node.
+	/// </summary>
+	[Export] public bool InputEnabled = true;
+	/// <summary>
+	/// The area used to capture input events for this control.
+	/// </summary>
 	[Export] public Area3D CaptureArea { get; set; }
+	/// <summary>
+	/// The SubViewport used to render the 3D scene.
+	/// </summary>
 	[Export] public SubViewport SubViewport { get; set; }
+	/// <summary>
+	/// The 3D mesh instance used to display the control.
+	/// </summary>
 	[Export] public MeshInstance3D Display { get; set; }
 
 	private Vector2 _meshSize;
