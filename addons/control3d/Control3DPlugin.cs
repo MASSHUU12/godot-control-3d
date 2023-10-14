@@ -1,9 +1,8 @@
 #if TOOLS
 using Godot;
-using System;
 
 [Tool]
-public partial class control3d : EditorPlugin
+public partial class Control3DPlugin : EditorPlugin
 {
 	public override void _EnterTree()
 	{
