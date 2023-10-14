@@ -45,3 +45,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 1.491, 0.51)
 
 [node name="Player" parent="Scene" instance=ExtResource("2_456kc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14588, 2.36964)
+
+[node name="Label3D" type="Label3D" parent="Scene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.849297, 1.63562, 0)
+billboard = 1
+text = "Press Alt
+to switch mouse mode"
