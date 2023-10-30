@@ -160,7 +160,7 @@ public partial class Control3D : Node3D
 		// If the mouse is inside the panel,
 		// we need to convert the mouse position to the 2D world.
 		mousePos3D = mouseInside
-			? CaptureArea.GlobalTransform.AffineInverse() * new Vector3(mousePos3D.X, mousePos3D.Y, 0)
+			? CaptureArea.GlobalTransform.AffineInverse() * new Vector3(mousePos3D.X, mousePos3D.Y, mousePos3D.Z)
 			: new(_halfMeshSize.X, -_halfMeshSize.Y, 0);
 
 		Vector2 mousePos2D = MouseTo2DWorld(mousePos3D);
